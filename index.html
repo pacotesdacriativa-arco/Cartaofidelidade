@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartão Fidelidade Premium</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#f3e8ff,#d8b4fe,#a855f7);
+color:#3b0764;
+min-height:100vh;
+}
+
+.hidden{display:none!important}
+
+.tela{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:25px;
+}
+
+.box,.card{
+background:rgba(255,255,255,.88);
+border-radius:30px;
+padding:24px;
+box-shadow:0 14px 35px rgba(126,34,206,.22);
+border:1px solid rgba(255,255,255,.8);
+}
+
+.box{
+width:100%;
+max-width:430px;
+text-align:center;
+}
+
+.container{
+max-width:520px;
+margin:auto;
+padding:22px;
+min-height:100vh;
+}
+
+.logo{
+font-size:58px;
+text-align:center;
+}
+
+h1,h2{
+text-align:center;
+color:#7e22ce;
+margin-top:10px;
+}
+
+.sub{
+text-align:center;
+color:#6b21a8;
+font-weight:bold;
+margin-top:8px;
+}
+
+label{
+display:block;
+margin-top:13px;
+font-weight:bold;
+color:#581c87;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:7px;
+border-radius:17px;
+border:1px solid #c084fc;
+background:#fff;
+font-size:15px;
+}
+
+button{
+border:none;
+cursor:pointer;
+font-weight:bold;
+}
+
+.btn{
+width:100%;
+padding:15px;
+margin-top:15px;
+border-radius:20px;
+background:linear-gradient(135deg,#7e22ce,#c084fc,#e9d5ff);
+color:white;
+font-size:16px;
+box-shadow:0 8px 22px rgba(126,34,206,.30);
+}
+
+.btn-light{
+background:#faf5ff;
+color:#7e22ce;
+border:1px solid #d8b4fe;
+}
+
+.cartao{
+background:linear-gradient(135deg,#ffffff,#f5eaff,#e9d5ff);
+border:2px solid #c084fc;
+border-radius:28px;
+padding:20px;
+margin-top:18px;
+box-shadow:0 12px 30px rgba(126,34,206,.22);
+position:relative;
+overflow:hidden;
+}
+
+.cartao::after{
+content:"VIP";
+position:absolute;
+right:-10px;
+bottom:-18px;
+font-size:70px;
+font-weight:bold;
+color:rgba(126,34,206,.06);
+}
+
+.nomeCliente{
+font-size:22px;
+font-weight:bold;
+color:#581c87;
+text-align:center;
+}
+
+.premio{
+text-align:center;
+margin-top:6px;
+font-size:13px;
+color:#7e22ce;
+font-weight:bold;
+}
+
+.estrelas{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+margin-top:18px;
+}
+
+.estrela{
+height:45px;
+border-radius:50%;
+border:2px solid #a855f7;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+background:white;
+color:#d8b4fe;
+font-weight:bold;
+}
+
+.estrela.cheia{
+background:linear-gradient(135deg,#7e22ce,#c084fc);
+color:white;
+box-shadow:0 0 14px rgba(126,34,206,.35);
+}
+
+.acoes{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:15px;
+}
+
+.acoes button{
+padding:12px;
+border-radius:15px;
+}
+
+.avisoPremio{
+background:#f3e8ff;
+border:1px solid #c084fc;
+border-radius:18px;
+padding:12px;
+margin-top:14px;
+text-align:center;
+font-weight:bold;
+color:#7e22ce;
+}
+
+.delete{
+background:#be123c;
+color:white;
+padding:12px;
+border-radius:15px;
+margin-top:10px;
+width:100%;
+}
+
+footer{
+text-align:center;
+font-size:12px;
+color:#581c87;
+margin-top:20px;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="tela" id="login">
+  <div class="box">
+    <div class="logo">✦</div>
+    <h1>Cartão Fidelidade Premium</h1>
+    <p class="sub">Controle de clientes VIP com cartões digitais lilás</p>
+
+    <label>Senha</label>
+    <input type="password" id="senha" placeholder="Digite a senha">
+
+    <button class="btn" onclick="entrar()">Entrar</button>
+  </div>
+</div>
+
+<div class="container hidden" id="app">
+
+  <div class="logo">✦</div>
+  <h1>Cartão Fidelidade Premium</h1>
+  <p class="sub">Adicione clientes e marque as estrelinhas</p>
+
+  <div class="card">
+    <h2>Novo cartão</h2>
+
+    <label>Nome da cliente</label>
+    <input type="text" id="nomeCliente" placeholder="Ex: Maria Eduarda">
+
+    <label>Prêmio ao completar</label>
+    <input type="text" id="premioCliente" placeholder="Ex: ganhou manutenção grátis">
+
+    <button class="btn" onclick="adicionarCliente()">Criar cartão</button>
+  </div>
+
+  <div id="listaCartoes"></div>
+
+  <footer>Cartão Fidelidade Premium ✦</footer>
+
+</div>
+
+<script>
+let clientes = JSON.parse(localStorage.getItem("cartaoFidelidadePremium")) || [];
+
+function entrar(){
+  let senha = document.getElementById("senha").value;
+
+  if(senha === "chocolate333"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("app").classList.remove("hidden");
+    renderizar();
+  }else{
+    alert("Senha incorreta.");
+  }
+}
+
+function salvar(){
+  localStorage.setItem("cartaoFidelidadePremium", JSON.stringify(clientes));
+}
+
+function adicionarCliente(){
+  let nome = document.getElementById("nomeCliente").value;
+  let premio = document.getElementById("premioCliente").value;
+
+  if(!nome){
+    alert("Digite o nome da cliente.");
+    return;
+  }
+
+  clientes.push({
+    nome,
+    premio: premio || "Prêmio liberado",
+    estrelas:0
+  });
+
+  salvar();
+
+  document.getElementById("nomeCliente").value="";
+  document.getElementById("premioCliente").value="";
+
+  renderizar();
+}
+
+function adicionarEstrela(index){
+  if(clientes[index].estrelas < 10){
+    clientes[index].estrelas++;
+  }
+  salvar();
+  renderizar();
+}
+
+function removerEstrela(index){
+  if(clientes[index].estrelas > 0){
+    clientes[index].estrelas--;
+  }
+  salvar();
+  renderizar();
+}
+
+function excluirCliente(index){
+  if(confirm("Excluir esse cartão?")){
+    clientes.splice(index,1);
+    salvar();
+    renderizar();
+  }
+}
+
+function renderizar(){
+  let lista = document.getElementById("listaCartoes");
+  lista.innerHTML = "";
+
+  if(clientes.length === 0){
+    lista.innerHTML = "<p class='sub' style='margin-top:20px;'>Nenhum cartão criado ainda.</p>";
+    return;
+  }
+
+  clientes.forEach((c,index)=>{
+    let estrelas = "";
+
+    for(let i=1;i<=10;i++){
+      estrelas += `<div class="estrela ${i <= c.estrelas ? "cheia" : ""}">★</div>`;
+    }
+
+    lista.innerHTML += `
+      <div class="cartao">
+        <div class="nomeCliente">${c.nome}</div>
+        <div class="premio">Ao completar 10 estrelas: ${c.premio}</div>
+
+        <div class="estrelas">${estrelas}</div>
+
+        ${c.estrelas >= 10 ? `<div class="avisoPremio">Prêmio liberado!</div>` : ""}
+
+        <div class="acoes">
+          <button class="btn" onclick="adicionarEstrela(${index})">+ Estrela</button>
+          <button class="btn btn-light" onclick="removerEstrela(${index})">- Estrela</button>
+        </div>
+
+        <button class="delete" onclick="excluirCliente(${index})">Excluir cartão</button>
+      </div>
+    `;
+  });
+}
+</script>
+
+</body>
+</html>
