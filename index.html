@@ -10,7 +10,9 @@
 
 body{
 font-family:Arial,sans-serif;
-background:linear-gradient(180deg,#f3e8ff,#d8b4fe,#a855f7);
+background:
+radial-gradient(circle at top left,#f3e8ff,#d8b4fe 35%,transparent 65%),
+linear-gradient(180deg,#faf5ff,#d8b4fe,#a855f7);
 color:#3b0764;
 min-height:100vh;
 }
@@ -26,11 +28,11 @@ padding:25px;
 }
 
 .box,.card{
-background:rgba(255,255,255,.88);
-border-radius:30px;
-padding:24px;
-box-shadow:0 14px 35px rgba(126,34,206,.22);
-border:1px solid rgba(255,255,255,.8);
+background:rgba(255,255,255,.90);
+border-radius:32px;
+padding:25px;
+box-shadow:0 16px 38px rgba(126,34,206,.22);
+border:1px solid rgba(255,255,255,.85);
 }
 
 .box{
@@ -47,8 +49,9 @@ min-height:100vh;
 }
 
 .logo{
-font-size:58px;
+font-size:56px;
 text-align:center;
+color:#7e22ce;
 }
 
 h1,h2{
@@ -75,7 +78,7 @@ input{
 width:100%;
 padding:14px;
 margin-top:7px;
-border-radius:17px;
+border-radius:18px;
 border:1px solid #c084fc;
 background:#fff;
 font-size:15px;
@@ -91,7 +94,7 @@ font-weight:bold;
 width:100%;
 padding:15px;
 margin-top:15px;
-border-radius:20px;
+border-radius:22px;
 background:linear-gradient(135deg,#7e22ce,#c084fc,#e9d5ff);
 color:white;
 font-size:16px;
@@ -104,13 +107,18 @@ color:#7e22ce;
 border:1px solid #d8b4fe;
 }
 
-.cartao{
-background:linear-gradient(135deg,#ffffff,#f5eaff,#e9d5ff);
-border:2px solid #c084fc;
-border-radius:28px;
-padding:20px;
+.form-card{
 margin-top:18px;
-box-shadow:0 12px 30px rgba(126,34,206,.22);
+}
+
+.cartao{
+background:
+linear-gradient(135deg,#ffffff,#f4e8ff,#e9d5ff);
+border:2px solid #c084fc;
+border-radius:30px;
+padding:22px;
+margin-top:22px;
+box-shadow:0 16px 35px rgba(126,34,206,.25);
 position:relative;
 overflow:hidden;
 }
@@ -118,83 +126,124 @@ overflow:hidden;
 .cartao::after{
 content:"VIP";
 position:absolute;
-right:-10px;
-bottom:-18px;
-font-size:70px;
+right:-8px;
+top:8px;
+font-size:58px;
 font-weight:bold;
-color:rgba(126,34,206,.06);
+color:rgba(126,34,206,.07);
+}
+
+.selo{
+display:inline-block;
+background:linear-gradient(135deg,#7e22ce,#c084fc);
+color:white;
+padding:7px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+letter-spacing:1px;
 }
 
 .nomeCliente{
-font-size:22px;
+font-size:28px;
 font-weight:bold;
 color:#581c87;
 text-align:center;
+margin-top:12px;
 }
 
-.premio{
+.premioBox{
+background:#faf5ff;
+border:1px solid #d8b4fe;
+border-radius:20px;
+padding:12px;
 text-align:center;
-margin-top:6px;
-font-size:13px;
-color:#7e22ce;
+margin-top:14px;
+color:#6b21a8;
 font-weight:bold;
 }
 
 .estrelas{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
-margin-top:18px;
+display:flex;
+justify-content:center;
+gap:12px;
+margin-top:22px;
 }
 
 .estrela{
-height:45px;
+width:50px;
+height:50px;
 border-radius:50%;
 border:2px solid #a855f7;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:24px;
+font-size:30px;
 background:white;
 color:#d8b4fe;
-font-weight:bold;
+box-shadow:0 5px 12px rgba(126,34,206,.12);
 }
 
 .estrela.cheia{
 background:linear-gradient(135deg,#7e22ce,#c084fc);
 color:white;
-box-shadow:0 0 14px rgba(126,34,206,.35);
+box-shadow:0 0 18px rgba(126,34,206,.45);
+}
+
+.contador{
+text-align:center;
+font-size:20px;
+font-weight:bold;
+color:#581c87;
+margin-top:16px;
+}
+
+.barra{
+height:12px;
+background:#eadbff;
+border-radius:999px;
+overflow:hidden;
+margin-top:12px;
+}
+
+.progresso{
+height:100%;
+width:0%;
+background:linear-gradient(135deg,#7e22ce,#c084fc);
+border-radius:999px;
+transition:.3s;
 }
 
 .acoes{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-margin-top:15px;
+margin-top:16px;
 }
 
 .acoes button{
 padding:12px;
-border-radius:15px;
+border-radius:16px;
+font-size:14px;
 }
 
 .avisoPremio{
-background:#f3e8ff;
-border:1px solid #c084fc;
-border-radius:18px;
-padding:12px;
-margin-top:14px;
+background:linear-gradient(135deg,#7e22ce,#c084fc);
+color:white;
+border-radius:20px;
+padding:13px;
+margin-top:15px;
 text-align:center;
 font-weight:bold;
-color:#7e22ce;
+box-shadow:0 8px 20px rgba(126,34,206,.25);
 }
 
 .delete{
 background:#be123c;
 color:white;
 padding:12px;
-border-radius:15px;
-margin-top:10px;
+border-radius:16px;
+margin-top:12px;
 width:100%;
 }
 
@@ -202,7 +251,7 @@ footer{
 text-align:center;
 font-size:12px;
 color:#581c87;
-margin-top:20px;
+margin-top:22px;
 font-weight:bold;
 }
 </style>
@@ -214,7 +263,7 @@ font-weight:bold;
   <div class="box">
     <div class="logo">✦</div>
     <h1>Cartão Fidelidade Premium</h1>
-    <p class="sub">Controle de clientes VIP com cartões digitais lilás</p>
+    <p class="sub">Cartões digitais VIP para suas clientes</p>
 
     <label>Senha</label>
     <input type="password" id="senha" placeholder="Digite a senha">
@@ -227,18 +276,18 @@ font-weight:bold;
 
   <div class="logo">✦</div>
   <h1>Cartão Fidelidade Premium</h1>
-  <p class="sub">Adicione clientes e marque as estrelinhas</p>
+  <p class="sub">Crie cartões e marque as visitas das clientes</p>
 
-  <div class="card">
-    <h2>Novo cartão</h2>
+  <div class="card form-card">
+    <h2>Novo cliente VIP</h2>
 
     <label>Nome da cliente</label>
     <input type="text" id="nomeCliente" placeholder="Ex: Maria Eduarda">
 
     <label>Prêmio ao completar</label>
-    <input type="text" id="premioCliente" placeholder="Ex: ganhou manutenção grátis">
+    <input type="text" id="premioCliente" placeholder="Ex: Manutenção grátis">
 
-    <button class="btn" onclick="adicionarCliente()">Criar cartão</button>
+    <button class="btn" onclick="adicionarCliente()">Criar cartão VIP</button>
   </div>
 
   <div id="listaCartoes"></div>
@@ -290,7 +339,7 @@ function adicionarCliente(){
 }
 
 function adicionarEstrela(index){
-  if(clientes[index].estrelas < 10){
+  if(clientes[index].estrelas < 5){
     clientes[index].estrelas++;
   }
   salvar();
@@ -325,22 +374,35 @@ function renderizar(){
   clientes.forEach((c,index)=>{
     let estrelas = "";
 
-    for(let i=1;i<=10;i++){
+    for(let i=1;i<=5;i++){
       estrelas += `<div class="estrela ${i <= c.estrelas ? "cheia" : ""}">★</div>`;
     }
 
+    let porcentagem = (c.estrelas / 5) * 100;
+
     lista.innerHTML += `
       <div class="cartao">
+        <span class="selo">CLIENTE VIP</span>
+
         <div class="nomeCliente">${c.nome}</div>
-        <div class="premio">Ao completar 10 estrelas: ${c.premio}</div>
+
+        <div class="premioBox">
+          PRÊMIO: ${c.premio}
+        </div>
 
         <div class="estrelas">${estrelas}</div>
 
-        ${c.estrelas >= 10 ? `<div class="avisoPremio">Prêmio liberado!</div>` : ""}
+        <div class="contador">${c.estrelas}/5 visitas</div>
+
+        <div class="barra">
+          <div class="progresso" style="width:${porcentagem}%"></div>
+        </div>
+
+        ${c.estrelas >= 5 ? `<div class="avisoPremio">Prêmio liberado!</div>` : ""}
 
         <div class="acoes">
-          <button class="btn" onclick="adicionarEstrela(${index})">+ Estrela</button>
-          <button class="btn btn-light" onclick="removerEstrela(${index})">- Estrela</button>
+          <button class="btn" onclick="adicionarEstrela(${index})">+ Visita</button>
+          <button class="btn btn-light" onclick="removerEstrela(${index})">- Visita</button>
         </div>
 
         <button class="delete" onclick="excluirCliente(${index})">Excluir cartão</button>
